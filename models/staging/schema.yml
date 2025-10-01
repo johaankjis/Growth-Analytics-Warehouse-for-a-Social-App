@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      - name: raw_events
+        description: "Raw event data from ingestion API"
+
+models:
+  - name: stg_events
+    description: "Cleaned and normalized events from raw_events"
+    columns:
+      - name: event_id
+        description: "Unique event identifier"
+        tests:
+          - unique
+          - not_null
+      - name: event_name
+        description: "Name of the event"
+        tests:
+          - not_null
+      - name: event_timestamp
+        description: "Timestamp when the event occurred"
+        tests:
+          - not_null
+      - name: user_key
+        description: "User identifier (user_id or anonymous_id)"
+        tests:
+          - not_null
+
+  - name: stg_sessions
+    description: "Session-level aggregations from events"
+    columns:
+      - name: session_id
+        description: "Unique session identifier"
+        tests:
+          - unique
+          - not_null
+      - name: session_start
+        description: "Session start timestamp"
+        tests:
+          - not_null
