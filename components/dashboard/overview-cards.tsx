@@ -7,7 +7,7 @@ export async function OverviewCards() {
   try {
     overview = await analyticsAPI.getOverview()
   } catch (error) {
-    console.error("[v0] Failed to fetch overview:", error)
+    console.error("[] Failed to fetch overview:", error)
     return (
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {["Total Users", "Daily Active Users", "Avg Session Duration", "Bounce Rate"].map((title) => (
